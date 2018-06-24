@@ -41,7 +41,49 @@
 ## Game loop
 
 ```kotlin
+  while (running) {
+    var c: Canvas? = null
+    try {
+        c = holder.lockCanvas(null)
+        synchronized(holder) {
+            now = System.nanoTime()
+            unprocessed += (now - last) / 16666666.66667
+            last = now
+            while (unprocessed >= 1) {
+                unprocessed--
+                updates++
+                delta = (System.currentTimeMillis() - lastUpdate).toInt()
+                lastUpdate = System.currentTimeMillis()
 
+                update(System.currentTimeMillis() - appStartTime, delta)
+            }
+
+            try {
+                Thread.sleep(sleepTime)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            
+            frames++
+            render(c, System.currentTimeMillis())
+
+            if (nextLogTime < System.currentTimeMillis()) {
+                lastFps = "F:$frames U: $updates"
+                nextLogTime = System.currentTimeMillis() + 1000
+                frames = 0
+                updates = 0
+            }
+
+            if (showFps) {
+                c.drawText(lastFps, (width - 100).toFloat(), 60f, fpsPaint)
+            }
+        }
+    } finally {
+        if (c != null) {
+            holder!!.unlockCanvasAndPost(c)
+        }
+    }
+  }
 ```
 
 ## Links
