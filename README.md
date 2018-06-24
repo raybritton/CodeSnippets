@@ -88,6 +88,6 @@
 
 ## Links
 
-[https://gamedev.stackexchange.com/questions/117250/movement-appears-to-be-frame-rate-dependent-despite-use-of-time-deltatime/117256#117256](FPS indpendent logic)
+[FPS indpendent logic](https://gamedev.stackexchange.com/questions/117250/movement-appears-to-be-frame-rate-dependent-despite-use-of-time-deltatime/117256#117256)
 
-[https://www.redblobgames.com/grids/hexagons/](Coding with hexagons)
+[Coding with hexagons](https://www.redblobgames.com/grids/hexagons/)
