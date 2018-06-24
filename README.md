@@ -28,3 +28,24 @@
     return x to y
   }
 ```
+
+#### Angle from point to point
+
+```kotlin
+  fun angleTo(x1: Int, y1: Int, x2: Int, y2: Int): Int {
+    return Math.toDegrees(Math.atan2((y2 - y1).toDouble(), (x2 - x1).toDouble())).toInt()
+  }
+```
+
+
+## Game loop
+
+```kotlin
+
+```
+
+## Links
+
+[https://gamedev.stackexchange.com/questions/117250/movement-appears-to-be-frame-rate-dependent-despite-use-of-time-deltatime/117256#117256](FPS indpendent logic)
+
+[https://www.redblobgames.com/grids/hexagons/](Coding with hexagons)
