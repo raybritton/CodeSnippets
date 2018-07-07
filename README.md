@@ -37,6 +37,46 @@
   }
 ```
 
+#### Mid point of two points
+
+```kotlin
+  fun midPoint(x1: Int, y1: Int, x2: Int, y2: Int): Point {
+    return Point((x2 + x1) / 2f, (y2 + y1) / 2f)
+  }
+```
+
+## Direction
+
+```kotlin
+enum class Direction(val degrees: Float) {
+    TOP(0f), TOP_RIGHT(45f), RIGHT(90f), BOTTOM_RIGHT(135f), BOTTOM(180f), BOTTOM_LEFT(225f), LEFT(270f), TOP_LEFT(315f);
+
+    fun opposite() = this.rotateBy(180f)
+
+    fun rotateBy(degrees: Float): Direction {
+        val turns = degrees / 45f
+        var slot = (this.ordinal + turns).toInt() % 8
+        if (slot < 0) {
+            slot += 8
+        }
+        return values()[slot]
+    }
+
+    fun degreesTo(direction: Direction): Float {
+        return direction.degrees - this.degrees
+    }
+
+    companion object {
+        /**
+         * angle must be a multiple of 45
+         */
+        fun byAngle(angle: Float): Direction {
+            return TOP.rotateBy(angle)
+        }
+    }
+}
+```
+
 
 ## Game loop
 
@@ -52,7 +92,7 @@
             while (unprocessed >= 1) {
                 unprocessed--
                 updates++
-                delta = (System.currentTimeMillis() - lastUpdate).toInt()
+                delta = (System.currentTimeMillis() - lastTick).toFloat() / 1000f
                 lastUpdate = System.currentTimeMillis()
 
                 update(System.currentTimeMillis() - appStartTime, delta)
