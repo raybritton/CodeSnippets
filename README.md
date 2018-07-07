@@ -67,9 +67,6 @@ enum class Direction(val degrees: Float) {
     }
 
     companion object {
-        /**
-         * angle must be a multiple of 45
-         */
         fun byAngle(angle: Float): Direction {
             return TOP.rotateBy(angle)
         }
