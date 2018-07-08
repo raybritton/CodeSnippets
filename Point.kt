@@ -3,6 +3,7 @@ abstract class Point<T : Number>(var x: T, var y: T) {
     abstract fun set(x: T, y: T): Point<T>
     abstract fun distanceTo(x: T, y: T): T
     abstract fun midPointFrom(x: T, y: T): Point<T>
+    abstract fun moveBy(direction: Direction): Point<T>
     abstract fun move(direction: Direction)
     abstract fun angleTo(x: T, y: T): Float
     abstract fun pointOnCircle(radius: T, degrees: Float): Point<T>
@@ -29,6 +30,11 @@ class IntPoint(x: Int, y: Int) : Point<Int>(x, y) {
 
     override fun angleTo(x: Int, y: Int): Float {
         return Math.toDegrees(Math.atan2((y - this.y).toDouble(), (x - this.x).toDouble())).toFloat()
+    }
+
+    override fun moveBy(direction: Direction): IntPoint {
+        val (nx, ny) = pointOnCircle(1, direction.degrees)
+        return IntPoint(nx, ny)
     }
 
     override fun move(direction: Direction) {
@@ -64,6 +70,11 @@ class FloatPoint(x: Float, y: Float) : Point<Float>(x, y) {
 
     override fun angleTo(x: Float, y: Float): Float {
         return Math.toDegrees(Math.atan2((y - this.y).toDouble(), (x - this.x).toDouble())).toFloat()
+    }
+
+    override fun moveBy(direction: Direction): FloatPoint {
+        val (nx, ny) = pointOnCircle(1f, direction.degrees)
+        return FloatPoint(nx, ny)
     }
 
     override fun move(direction: Direction) {
