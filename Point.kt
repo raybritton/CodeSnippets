@@ -4,6 +4,7 @@ abstract class Point<T : Number>(var x: T, var y: T) {
     abstract fun distanceTo(x: T, y: T): T
     abstract fun midPointFrom(x: T, y: T): Point<T>
     abstract fun move(direction: Direction)
+    abstract fun angleTo(x: T, y: T): Float
     abstract fun pointOnCircle(radius: T, degrees: Float): Point<T>
     operator fun component1() = x
     operator fun component2() = y
@@ -24,6 +25,10 @@ class IntPoint(x: Int, y: Int) : Point<Int>(x, y) {
 
     override fun midPointFrom(x: Int, y: Int): IntPoint {
         return IntPoint(((this.x + x) / 2f).toInt(), ((this.y + y) / 2f).toInt())
+    }
+
+    override fun angleTo(x: Int, y: Int): Float {
+        return Math.toDegrees(Math.atan2((y - this.y).toDouble(), (x - this.x).toDouble())).toFloat()
     }
 
     override fun move(direction: Direction) {
@@ -55,6 +60,10 @@ class FloatPoint(x: Float, y: Float) : Point<Float>(x, y) {
 
     override fun midPointFrom(x: Float, y: Float): FloatPoint {
         return FloatPoint((this.x + x) / 2f, (this.y + y) / 2f)
+    }
+
+    override fun angleTo(x: Float, y: Float): Float {
+        return Math.toDegrees(Math.atan2((y - this.y).toDouble(), (x - this.x).toDouble())).toFloat()
     }
 
     override fun move(direction: Direction) {
