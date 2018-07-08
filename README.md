@@ -1,4 +1,4 @@
-# Code Snippets
+# Game Code Snippets
 
 ## Coordinates
 
