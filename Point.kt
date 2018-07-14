@@ -11,7 +11,7 @@ data class IntPoint(var x: Int, var y: Int) {
         y = ny
     }
 
-    fun isNear(x: Int, y: Int, range: Int) = contains(x.toDouble(), y.toDouble(), range.toDouble())
+    fun isNear(x: Int, y: Int, range: Int) = contains(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble(), range.toDouble())
     fun distanceTo(x: Int, y: Int) = distanceTo(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble()).roundToInt()
     fun midPointFrom(x: Int, y: Int) = midPoint(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble()).toIntPoint()
     fun angleTo(x: Int, y: Int) = angleTo(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble()).roundToInt()
@@ -36,7 +36,7 @@ data class FloatPoint(var x: Float, var y: Float) {
         y = ny
     }
 
-    fun isNear(x: Float, y: Float, range: Float) = contains(x.toDouble(), y.toDouble(), range.toDouble())
+    fun isNear(x: Float, y: Float, range: Float) = contains(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble(), range.toDouble())
     fun distanceTo(x: Float, y: Float) = distanceTo(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble()).toFloat()
     fun midPointFrom(x: Float, y: Float) = midPoint(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble()).toFloatPoint()
     fun angleTo(x: Float, y: Float) = angleTo(this.x.toDouble(), this.y.toDouble(), x.toDouble(), y.toDouble()).toFloat()
@@ -48,8 +48,8 @@ data class FloatPoint(var x: Float, var y: Float) {
     }
 }
 
-private fun contains(x: Double, y: Double, range: Double): Boolean {
-    return ((x - range)..(x + range)).contains(x) && ((y - range)..(y + range)).contains(y)
+private fun contains(cx: Double, cy: Double,x: Double, y: Double, range: Double): Boolean {
+    return ((cx - range)..(cx + range)).contains(x) && ((cy - range)..(cy + range)).contains(y)
 }
 
 private fun midPoint(x1: Double, y1: Double, x2: Double, y2: Double): Pair<Int, Int> {
